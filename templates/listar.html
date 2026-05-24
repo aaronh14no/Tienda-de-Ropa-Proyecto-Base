@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Listado de Prendas</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Nombre / Imagen</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td class="text-center">
+                        <strong>{{ product.name }}</strong><br>
+                        {% if product.image and product.image != '' %}
+                            <img src="{{ url_for('static', filename='uploads/' + product.image) }}"
+                                 alt="{{ product.name }}"
+                                 class="img-thumbnail mt-2"
+                                 style="width: 90px; height: auto;">
+                        {% else %}
+                            <small class="text-muted">Sin imagen</small>
+                        {% endif %}
+                    </td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>{{ product.category }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
