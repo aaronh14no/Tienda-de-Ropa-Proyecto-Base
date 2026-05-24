@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center mt-4 mb-4">Editar Prenda</h1>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 mb-3">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h5>Modificar Prenda</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('editar_producto_bp.edit', product_name=product.name) }}" method="POST">
+
+                    <label>Nombre</label>
+                    <input type="text" class="form-control mb-3" name="name" value="{{ product.name }}">
+
+                    <label>Descripción</label>
+                    <input type="text" class="form-control mb-3" name="description" value="{{ product.description }}">
+
+                    <label>Precio</label>
+                    <input type="text" class="form-control mb-3" name="price" value="{{ product.price }}">
+
+                    <label>Cantidad</label>
+                    <input type="text" class="form-control mb-3" name="stock" value="{{ product.stock }}">
+
+                    <label>Categoría</label>
+                    <input type="text" class="form-control mb-3" name="category" value="{{ product.category }}">
+
+                    <button class="btn btn-primary w-100" type="submit">Guardar Cambios</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

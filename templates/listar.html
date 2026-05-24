@@ -13,6 +13,7 @@
                     <th>Precio</th>
                     <th>Cantidad</th>
                     <th>Categoría</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,12 @@
                     <td>{{ product.price }}</td>
                     <td>{{ product.stock }}</td>
                     <td>{{ product.category }}</td>
+                    <td class="text-center">
+                        <a href="{{ url_for('editar_producto_bp.edit', product_name=product.name) }}"
+                           class="btn btn-primary btn-sm">
+                            Editar
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

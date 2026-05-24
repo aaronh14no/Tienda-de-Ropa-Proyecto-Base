@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import database as dbase
 from crearProducto import crear_producto_bp
+from editarProducto import editar_producto_bp
 import os
 
 db = dbase.dbConnection()
@@ -18,6 +19,7 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 app.register_blueprint(crear_producto_bp)
+app.register_blueprint(editar_producto_bp)
 
 @app.route('/')
 def home():
