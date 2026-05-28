@@ -11,6 +11,8 @@ def buscar_y_filtrar():
     # 1. Obtener los parámetros que envía el usuario desde el frontend
     query_nombre = request.args.get('query', '').strip()
     categoria = request.args.get('category', '').strip()
+    min_price = request.args.get('min_price', '').strip()
+    max_price = request.args.get('max_price', '').strip()
     # 2.  filtro dinámico para MongoDB
     filtros = {}
     # HU-05: Búsqueda por nombre 
@@ -20,8 +22,27 @@ def buscar_y_filtrar():
     # HU-06: Filtro por categoría
     if categoria and categoria != "Todas":
         filtros['category'] = categoria
-    # 3. Buscar los productos en la colección de Aaron ('products')
+        
+
+    #3. 08 FILTRO PRECIO
+
+    if min_price or max_price:
+    
+        filtros['price'] = {}
+    
+        try:
+    
+            if min_price != '':
+                filtros['price']['$gte'] = float(min_price)
+    
+            if max_price != '':
+                filtros['price']['$lte'] = float(max_price)
+    
+        except ValueError:
+    
+            return "Precio inválido", 400
     collection = db['products']
     productos_encontrados = list(collection.find(filtros))
     # Pasamos los resultados a la plantilla para que se rendericen en tarjetas
     return render_template('listar.html', productos=productos_encontrados, query=query_nombre, category_selected=categoria)
+ 
