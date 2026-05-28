@@ -3,9 +3,14 @@ import database as dbase
 from crearProducto import crear_producto_bp
 import os
 
+from buscarFiltrar import buscar_filtrar_bp # Importar el blueprint de búsqueda y filtrado
+
+
 db = dbase.dbConnection()
 
 app = Flask(__name__)
+
+app.register_blueprint(buscar_filtrar_bp) 
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
