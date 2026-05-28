@@ -5,10 +5,10 @@ import os
 
 from buscarFiltrar import buscar_filtrar_bp # Importar el blueprint de búsqueda y filtrado
 
-
 db = dbase.dbConnection()
 
 app = Flask(__name__)
+app.secret_key = 'tienda_ropa_secret'
 
 app.register_blueprint(buscar_filtrar_bp) 
 

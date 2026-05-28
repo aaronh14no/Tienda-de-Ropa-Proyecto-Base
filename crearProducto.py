@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, redirect, url_for, current_app
+from flask import Blueprint, request, jsonify, redirect, url_for, current_app, flash
 from product import Product
 import database as dbase
 import os
@@ -63,6 +63,8 @@ def addProduct():
                 'message': 'Campos incompletos'
             }), 400
         products.insert_one(product.toDBCollection())
+        flash("Producto creado correctamente.", "success")
         return redirect(url_for('home'))
 
-    return jsonify({'message': 'Datos incompletos'}), 400
+    flash("No se pudo crear el producto. Completa todos los campos.", "danger")
+    return redirect(url_for('home'))
