@@ -17,8 +17,8 @@ def addProduct():
     products = db['products']
     name = request.form['name']
     description = request.form['description']
-    price = request.form['price']
-    stock = request.form['stock']
+    price = float(request.form['price'])
+    stock = int(request.form['stock'])
     category = request.form['category']
 
     image = ''
