@@ -1,16 +1,17 @@
 from flask import Flask, render_template
 import database as dbase
 from crearProducto import crear_producto_bp
+from eliminarProducto import eliminar_producto_bp
 import os
 
-from buscarFiltrar import buscar_filtrar_bp # Importar el blueprint de búsqueda y filtrado
+from buscarFiltrar import buscar_filtrar_bp
 
 db = dbase.dbConnection()
 
 app = Flask(__name__)
 app.secret_key = 'tienda_ropa_secret'
 
-app.register_blueprint(buscar_filtrar_bp) 
+app.register_blueprint(buscar_filtrar_bp)
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -23,6 +24,7 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 app.register_blueprint(crear_producto_bp)
+app.register_blueprint(eliminar_producto_bp)
 
 @app.route('/')
 def home():
