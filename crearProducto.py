@@ -12,7 +12,9 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS2']
 
+
 @crear_producto_bp.route('/products', methods=['POST'])
+
 def addProduct():
     products = db['products']
     name = request.form['name']
@@ -33,6 +35,33 @@ def addProduct():
 
     if name and description and price and stock and category:
         product = Product(name, description, price, stock, category, image)
+        try:
+
+            stock = int(request.form['stock'])
+        
+            if stock < 0:
+                return jsonify({
+                    'message': 'El stock no puede ser negativo'
+                }), 400
+        
+        except ValueError:
+        
+            return jsonify({
+                'message': 'El stock debe ser numérico'
+            }), 400
+        try:
+        
+            price = float(request.form['price'])
+        
+        except ValueError:
+        
+            return jsonify({
+                'message': 'El precio debe ser numérico'
+            }), 400
+        if not name or not description or not category:
+            return jsonify({
+                'message': 'Campos incompletos'
+            }), 400
         products.insert_one(product.toDBCollection())
         return redirect(url_for('home'))
 
