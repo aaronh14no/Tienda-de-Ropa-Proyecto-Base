@@ -3,22 +3,28 @@
 
 <div class="container mt-4">
     <h2 class="mb-4 text-center">Catálogo de Prendas - Stilo</h2>
-
-    <form action="/products/search" method="GET" class="row g-3 mb-5 p-3 bg-light rounded shadow-sm">
-        <div class="col-md-5">
-            <input type="text" name="query" class="form-control" placeholder="Buscar prenda por nombre..." value="{{ query or '' }}">
+<form action="/products/search" method="GET" class="row g-3 mb-5 p-3 bg-light rounded shadow-sm">
+        <div class="col-md-3">
+            <input type="text" name="query" class="form-control" placeholder="Buscar prenda..." value="{{ query or '' }}">
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <select name="category" class="form-select">
                 <option value="Todas" {% if category_selected == 'Todas' or not category_selected %}selected{% endif %}>Todas las Categorías</option>
                 <option value="Caballeros" {% if category_selected == 'Caballeros' %}selected{% endif %}>Caballeros</option>
                 <option value="Damas" {% if category_selected == 'Damas' %}selected{% endif %}>Damas</option>
-                <option value="Niños" {% if category_selected == 'Niños' %}selected{% endif %}>Niños</option>
             </select>
         </div>
 
-        <div class="col-md-3 d-flex gap-2">
+        <div class="col-md-2">
+            <input type="number" step="0.01" name="min_price" class="form-control" placeholder="Precio Min" value="{{ min_price or '' }}">
+        </div>
+
+        <div class="col-md-2">
+            <input type="number" step="0.01" name="max_price" class="form-control" placeholder="Precio Max" value="{{ max_price or '' }}">
+        </div>
+
+        <div class="col-md-2 d-flex gap-2">
             <button type="submit" class="btn btn-primary w-100">Filtrar</button>
             <a href="/products/search" class="btn btn-secondary">Limpiar</a>
         </div>
@@ -94,7 +100,3 @@
                 </div>
             </div>
         {% endif %}
-    </div>
-</div>
-
-{% endblock %}
