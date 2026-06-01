@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import database as dbase
 from crearProducto import crear_producto_bp
 from eliminarProducto import eliminar_producto_bp
+from editarProducto import editar_producto_bp
 import os
 
 from buscarFiltrar import buscar_filtrar_bp
@@ -25,6 +26,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 app.register_blueprint(crear_producto_bp)
 app.register_blueprint(eliminar_producto_bp)
+app.register_blueprint(editar_producto_bp)
 
 @app.route('/')
 def home():

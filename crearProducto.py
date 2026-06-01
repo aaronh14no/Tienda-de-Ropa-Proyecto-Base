@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, redirect, url_for, current_app, f
 from product import Product
 import database as dbase
 import os
+import random
 from werkzeug.utils import secure_filename
 
 db = dbase.dbConnection()
@@ -19,7 +20,7 @@ def addProduct():
     products = db['products']
     name = request.form['name']
     description = request.form['description']
-    price = float(request.form['price'])
+    price = random.choice([10, 100])
     stock = int(request.form['stock'])
     category = request.form['category']
 
@@ -33,10 +34,9 @@ def addProduct():
             file.save(save_path)
             image = filename
 
-    if name and description and price and stock and category:
+    if name and description and stock and category:
         product = Product(name, description, price, stock, category, image)
         try:
-
             stock = int(request.form['stock'])
         
             if stock < 0:
@@ -45,23 +45,15 @@ def addProduct():
                 }), 400
         
         except ValueError:
-        
             return jsonify({
                 'message': 'El stock debe ser numérico'
             }), 400
-        try:
-        
-            price = float(request.form['price'])
-        
-        except ValueError:
-        
-            return jsonify({
-                'message': 'El precio debe ser numérico'
-            }), 400
+
         if not name or not description or not category:
             return jsonify({
                 'message': 'Campos incompletos'
             }), 400
+
         products.insert_one(product.toDBCollection())
         flash("Producto creado correctamente.", "success")
         return redirect(url_for('home'))
