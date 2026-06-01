@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Listado de Productos</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Nombre / Imagen</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td class="text-center">
+                        <strong>{{ product.nombre or product.name }}</strong><br>
+
+                        {% set img_val = product.imagen or product.image %}
+                        
+                        {% if img_val %}
+                            {# Si es un link externo de internet #}
+                            {% if img_val.startswith('http') %}
+                                <img src="{{ img_val }}" class="img-thumbnail mt-2" style="width: 90px; height: auto;">
+                            {% else %}
+                                {# Si es un archivo local en static/uploads #}
+                                <img src="{{ url_for('static', filename='uploads/' + img_val) }}"
+                                     class="img-thumbnail mt-2" style="width: 90px; height: auto;"
+                                     onerror="this.src='https://placehold.co/90?text=Error+Ruta'">
+                            {% endif %}
+                        {% else %}
+                            <small class="text-muted">Sin imagen</small>
+                        {% endif %}
+                    </td>
+
+                    <td>{{ product.descripcion or product.description }}</td>
+                    <td>{{ product.precio or product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>{{ product.categoria or product.category }}</td>
+
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center gap-2">
+                            {# IMPORTANTE: Asegúrate de que el parámetro sea product_name #}
+                            <a href="{{ url_for('editar_producto_bp.edit', product_name=product.nombre or product.name) }}" 
+                               class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
+
+                            <a href="{{ url_for('eliminar_producto_bp.delete', product_name=product.nombre or product.name) }}" 
+                                class="btn btn-danger btn-sm"
+                                onclick="return confirm('¿Eliminar {{ product.nombre or product.name }}?')">
+                                Eliminar
+                            </a>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

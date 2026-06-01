@@ -1,0 +1,54 @@
+                        PARTES A REPARTIR
+--------------> PARTE 1 luis, mauricio
+1. Crear producto
+    - Formulario con campos: nombre, descripción, precio, stock, categoría, imagen.
+5. Manejo de imágenes
+    Opción A: URL de imagen.
+    Opción B: Carga de archivo en static/uploads/.
+    Debe usarse una imagen por defecto si falta.
+
+--------------> PARTE 2 juan
+2. Listar productos
+    - Mostrar productos en tabla o tarjetas.
+    - Incluir nombre, precio, stock, categoría e imagen.
+
+--------------> PARTE 3 jesus
+3. Actualizar producto
+    - Permitir editar todos los campos.
+
+--------------> PARTE 4 patty
+4. Eliminar producto
+    - Mostrar pantalla de confirmación previa.
+
+--------------> PARTE 5 paolo
+6. Filtros y búsqueda
+    * Filtro por categoría
+    * Búsqueda por nombre
+    * Filtro por rango de precio
+    Los filtros deben combinarse.
+
+
+--------------> REQUISITOS TECNICOS
+4. Requisitos de navegación y vistas
+Cada acción del CRUD debe estar en una página independiente:
+    * /products
+    * /products/new
+    * /products/<id>
+    * /products/<id>/edit
+    * /products/<id>/delete
+
+7. Requisitos técnicos
+    * Uso de Flask, MongoDB, Jinja2.
+    * Código organizado en módulos.
+
+8. Requisitos de interfaz
+    * Uso de Bootstrap.
+    * Botones de CRUD visibles.
+
+9. Entregables obligatorios
+    1. Repositorio con el código fuente completo.
+    2. README.md con instrucciones y detalles.
+    3. Video obligatorio (máximo 3 minutos) mostrando:
+        - La aplicación funcionando
+        - Navegación por vistas
+        - Explicación breve de la estructura
