@@ -20,17 +20,17 @@ def addProduct():
     description = request.form.get('description', '').strip()
     category = request.form.get('category', '').strip()
 
-    # 2. VALIDACIONES DE SEGURIDAD (Campos obligatorios)
+    # 2.VALIDACIONES DE SEGURIDAD 
     if not name or not description or not category:
         return jsonify({'message': 'Campos obligatorios incompletos'}), 400
 
-    # 3. HU-09: Validación de Precio Numérico
+    # HU-09: Validación de Precio Numérico
     try:
         price = float(request.form.get('price', 0))
     except ValueError:
         return jsonify({'message': 'El precio debe ser un número válido'}), 400
 
-    # 4. HU-09: Validación de Stock (Entero y No Negativo)
+    # HU-09: Validación de Stock (Entero y No Negativo)
     try:
         stock = int(request.form.get('stock', 0))
         if stock < 0:
@@ -38,7 +38,7 @@ def addProduct():
     except ValueError:
         return jsonify({'message': 'El stock debe ser un número entero'}), 400
 
-    # 5. Procesamiento de la Imagen (Subida local de archivos)
+    #  Procesamiento de la Imagen (Subida local de archivos)
     image = ''
     if 'image' in request.files:
         file = request.files['image']

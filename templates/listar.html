@@ -4,15 +4,16 @@
 <div class="container mt-4">
     <h2 class="mb-4 text-center">Catálogo de Prendas - Stilo</h2>
 <form action="/products/search" method="GET" class="row g-3 mb-5 p-3 bg-light rounded shadow-sm">
+    
         <div class="col-md-3">
             <input type="text" name="query" class="form-control" placeholder="Buscar prenda..." value="{{ query or '' }}">
         </div>
 
         <div class="col-md-3">
             <select name="category" class="form-select">
-                <option value="Todas" {% if category_selected == 'Todas' or not category_selected %}selected{% endif %}>Todas las Categorías</option>
+                <option value="Todas" {% if category_selected == 'Todas' %}selected{% endif %}>Todas las Categorías</option>
                 <option value="Caballeros" {% if category_selected == 'Caballeros' %}selected{% endif %}>Caballeros</option>
-                <option value="Damas" {% if category_selected == 'Damas' %}selected{% endif %}>Damas</option>
+                <option value="Damas" {% if category_selected == 'Damas' or not category_selected %}selected{% endif %}>Damas</option>
             </select>
         </div>
 
@@ -79,13 +80,13 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex gap-2 bg-white border-top-0 pb-3">
-                            <a href="/products/{{ product._id }}/edit"
-                               class="btn btn-sm btn-outline-warning w-100">
+                            <a href="/edit/{{ product.nombre }}" 
+                            class="btn btn-sm btn-outline-warning w-100">
                                 Editar
                             </a>
-
-                            <a href="/products/{{ product._id }}/delete"
-                               class="btn btn-sm btn-outline-danger w-100">
+                            
+                            <a href="/delete/{{ product.nombre }}" 
+                            class="btn btn-sm btn-outline-danger w-100">
                                 Eliminar
                             </a>
                         </div>
@@ -100,3 +101,7 @@
                 </div>
             </div>
         {% endif %}
+        </div>
+</div>
+
+{% endblock %}

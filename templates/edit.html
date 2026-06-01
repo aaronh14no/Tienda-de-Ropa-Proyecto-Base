@@ -10,7 +10,7 @@
                 <h5>Modificar Prenda</h5>
             </div>
             <div class="card-body">
-                <form action="{{ url_for('editar_producto_bp.edit', product_name=product.name) }}" method="POST">
+                <form action= "/edit/{{ product.nombre }}" method="POST">
 
                     <label>Nombre</label>
                     <input type="text" class="form-control mb-3" name="name" value="{{ product.name }}">

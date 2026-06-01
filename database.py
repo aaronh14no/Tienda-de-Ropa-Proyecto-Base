@@ -10,4 +10,4 @@ def dbConnection():
         return db
     except Exception as e:
         print("Error de conexión con la bd:", e)
-        return Nonepy
+        return None.py

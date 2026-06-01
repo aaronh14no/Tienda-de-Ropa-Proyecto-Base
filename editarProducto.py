@@ -19,14 +19,14 @@ def edit(product_name):
         products.update_one(
             {'name': product_name},
             {'$set': {
-                'name': name,
-                'description': description,
-                'price': price,
+                'nombre': name,
+                'descripcion': description,
+                'precio': price,
                 'stock': stock,
-                'category': category
+                'categoria': category
             }}
         )
         return redirect(url_for('listar'))
 
-    product = products.find_one({'name': product_name})
+    product = products.find_one({'nombre': product_name})
     return render_template('edit.html', product=product)
